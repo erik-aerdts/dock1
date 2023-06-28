@@ -9,7 +9,7 @@ pipeline {
         }
       }
       steps {
-      	sh 'docker run --name dock1 -d -p 80:80 dock1'
+      	sh 'echo STAGE01'
       }
     }
   }
