@@ -9,7 +9,7 @@ pipeline {
         }
       }
       steps {
-      	sh 'apt update'
+      	sh 'ifconfig'
       }
     }
   }
