@@ -9,7 +9,7 @@ pipeline {
         }
       }
       steps {
-      	#sh 'ifconfig'
+      	sh 'echo STAGE01'
       }
     }
   }
