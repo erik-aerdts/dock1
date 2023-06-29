@@ -1,17 +1,30 @@
-#!groovy
-pipeline {
-	agent none
-  stages {
-  	stage('Dock1 Install') {
-    	agent {
-      	docker {
-        	image 'dock1'
+pipeline{
+    agent any
+    options{
+        buildDiscarder(logRotator(numToKeepStr: '5', daysToKeepStr: '5'))
+        timestamps()
+    }
+    environment{
+        
+        registry = "erikaerdts/dock1"
+        registryCredential = 'dockerhub'        
+    }
+    
+    stages{
+       stage('Building image') {
+      steps{
+        script {
+          dockerImage = docker.build registry + ":$BUILD_NUMBER"
         }
       }
-      steps {
-      	sh 'echo STAGE01'
-        sh 'docker run --name dock1 -d -p 80:80 dock1'
+    }
+       stage('Deploy Image') {
+      steps{
+         script {
+            docker.withRegistry( '', registryCredential ) {
+            dockerImage.push()
+          }
+        }
       }
     }
-}
 }
