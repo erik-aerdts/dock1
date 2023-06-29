@@ -12,10 +12,12 @@ pipeline {
       	sh 'echo STAGE01'
       }
     }
-  
        stage('Run Dock1') {
        agent {
-       steps {
+      docker {
+                image 'dock1'
+        } 
+      steps {
       sh 'docker run --name dock1 -d -p 80:80 dock1' 
       }
     }
