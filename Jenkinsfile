@@ -12,7 +12,7 @@ pipeline {
       	sh 'echo STAGE01'
       }
     }
-  }
+  
        stage('Run Dock1') {
        agent {
        steps {
@@ -20,4 +20,5 @@ pipeline {
       }
     }
   }
+}
 }
