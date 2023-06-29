@@ -7,7 +7,7 @@ pipeline{
     environment{
         
         registry = "erikaerdts/dock1"
-        registryCredential = '40d1977e-7e28-4e66-a964-2cf13af1cf83'        
+        registryCredential = 'dockerhub'        
     }
     
     stages{
