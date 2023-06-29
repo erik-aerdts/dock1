@@ -13,4 +13,11 @@ pipeline {
       }
     }
   }
+       stage('Run Dock1') {
+       agent {
+       steps {
+       docker.image("dock1").run()
+      }
+    }
+  }
 }
