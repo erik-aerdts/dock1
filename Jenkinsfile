@@ -27,11 +27,15 @@ pipeline{
         }
       }
     }
-        stage('Deploy'){
-        agent {label 'dock1'}
-            script {
-                docker.image('erikaerdts/dock1).withRun('-d -p 80:80' )
+       stage ('Deploy to Octopus') {
+            steps {
+                withCredentials([string(credentialsId: 'octopusapi', variable: 'octopusapi')]) {
+                    sh """
+                    ${tool('Octo CLI')}/Octo push --package target/demo.0.0.1-SNAPSHOT.war --replace-existing --server https://192.168.230.4 --apiKey ${APIKey}
+                    ${tool('Octo CLI')}/Octo create-release --project "dock1" --server https://192.168.230.4 --apiKey ${APIKey}
+                    ${tool('Octo CLI')}/Octo deploy-release --project "dock1" --version latest --deployto Integration --server https://192.168.230.4 --apiKey ${APIKey}
+                    """
+                }
             }
-}
 }
 }
