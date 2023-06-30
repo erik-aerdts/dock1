@@ -29,10 +29,9 @@ pipeline{
     }
         stage('Deploy'){
         agent {label 'dock1'}
-            steps {
-                sh "docker stop dock1 | true"
-                sh "docker rm dock1 | true"
-                sh "docker run --name dock1 -d -p 80:80 erikaerdts/dock1"
+            script {
+                docker.image('erikaerdts/dock1).withrun(' --name dock1' +
+                                                        ' -d -p 80:80' )
             }
 }
 }
