@@ -30,8 +30,7 @@ pipeline{
         stage('Deploy'){
         agent {label 'dock1'}
             script {
-                docker.image('erikaerdts/dock1).withrun(' --name dock1' +
-                                                        ' -d -p 80:80' )
+                docker.image('erikaerdts/dock1).withRun('-d -p 80:80' )
             }
 }
 }
